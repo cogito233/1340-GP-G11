@@ -8,7 +8,7 @@ Xijia TAO(?)
 
 - The basic interface is shown below (just a bit similar to it in a way):
 
-![samegame](.\samegame.png)
+![samegame](samegame.png)
 
 - As the game we familiar with, we can eliminate two or more adjacent squares of the same color. The more colors you eliminate at one time, the higher your score will be. There is a bonus point for leaving as few blocks as possible that can not eliminate them.
 - If your score exceeds the requirements for the current round, you can continue the game and proceed to the next round。
