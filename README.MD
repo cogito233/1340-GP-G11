@@ -1,3 +1,5 @@
+# SameGame in C++
+
 ### Team member
 
 Zhiheng LYU (3035772432)
@@ -10,7 +12,10 @@ Xijia TAO (3035767762)
 
 ![samegame](samegame.png)
 
-- As the game we familiar with, we can eliminate two or more adjacent squares of the same color. The more colors you eliminate at one time, the higher your score will be. There is a bonus point for leaving as few blocks as possible that can not eliminate them.
+- Initially, the field is filled with blocks of different colors.
+- As the game we familiar with, we can eliminate two or more adjacent blocks of the same color. The more blocks you eliminate at one time, the higher your score will be. 
+- After every removal, blocks that are not supported will fall down. If a column has no blocks, other columns on its right will slide towards it (i.e., to the left).
+- There is a bonus point for leaving as few blocks as possible that can not be eliminated.
 - If your score exceeds the requirements for the current round, you can continue the game and proceed to the next round.
 
 ### Game features
@@ -21,11 +26,11 @@ Xijia TAO (3035767762)
    
 2. Data structures for storing game status
    
-   - We generate a random game graph based on a difficulty factor that increases with the number of rounds of the game
+   - We generate a random game *graph* based on a difficulty factor that increases with the number of rounds of the game.
    
 3. Dynamic memory management
 
-   - We use linked lists to store map information, and we delete parts of the map that have been eliminated in time. Linked lists, in comparison to arrays, can have dynamic size and cost less time of deletion.
+   - We use linked lists to store map information, and we delete parts of the map that have been eliminated in time. Linked lists, in comparison to arrays, can have dynamic sizes and cost less time of deletion.
 
    - After finishing a round of the game, we delete and recreate a `Map` object to prevent memory leaks.
 
