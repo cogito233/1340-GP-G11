@@ -1,4 +1,17 @@
+# Predefined variables
+FLAGS = -pedantic-errors -std=c++11
+
+# Build targets
 map.o: ../src/map.cpp ../src/map.h
-	g++ -c ../src/map.cpp
+	g++ $(FLAGS) -c $<
+
 main: ../src/main.cpp map.o
-	g++ ../src/main.cpp map.o -o main
+	g++ $(FLAGS)  $^ -o $@
+	@echo "~~Successful Compilation~~"
+
+# Delete all object codes & executable
+clean: 
+	rm -rfv *.o
+	rm main
+
+.PHONY: clean
