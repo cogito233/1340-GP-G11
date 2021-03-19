@@ -7,6 +7,7 @@ namespace map{
 	class map{
 		private:
 			int map[30][30];
+			void copy_column(int x,int y);
 			int normalization();
 			int dfs(int x,int y,int colour,int &sum);
 		public:
