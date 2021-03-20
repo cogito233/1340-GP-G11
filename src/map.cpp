@@ -16,21 +16,21 @@ namespace mp{
 	void map::copy_column(int x,int y) {
 		if (x == y) return;
 		for (int i = 1; i <= 20; i++)
-			this->f[x][i] = this->f[y][i];
+			this->f[i][x] = this->f[i][y];
 	}
 	void map::normalization(){
 		for (int j = 1; j <= 20; j++) {
 			int k = 21;
-			for (int i = 1; i <= 20; i++) 
+			for (int i = 20; i >= 1; i--) 
 				if (this->f[i][j])
 					this->f[--k][j] = this->f[i][j];
 			for (k--; k >= 1; k--) this->f[k][j] = 0;
 		}
 		int k = 0;
 		for (int i = 1; i <= 20; i++) 
-			if (this->f[i][1])
+			if (this->f[20][i])
 				this->copy_column(++k,i);
-		for (k++; k <= 20; k++) this->copy_column(k,0);
+		for (k++; k <= 20; k++) this->copy_column(k, 0);
 	}
 	
 	map::map() {
