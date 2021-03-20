@@ -19,12 +19,12 @@ namespace mp{
 			this->f[x][i] = this->f[y][i];
 	}
 	void map::normalization(){
-		for (int i = 1; i <= 20 ;i++) {
-			int k = 0;
-			for (int j = 1; j <= 20; j++) 
+		for (int j = 1; j <= 20; j++) {
+			int k = 21;
+			for (int i = 1; i <= 20; i++) 
 				if (this->f[i][j])
-					this->f[i][++k] = this->f[i][j];
-			for (k++; k <= 20; k++) this->f[i][k] = 0;
+					this->f[--k][j] = this->f[i][j];
+			for (k--; k >= 1; k--) this->f[k][j] = 0;
 		}
 		int k = 0;
 		for (int i = 1; i <= 20; i++) 
