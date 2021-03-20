@@ -48,7 +48,8 @@ namespace mp{
 		bool flag = 1;
 		for (int i = 1; i <= 20; i++)
 			for (int j = 1; j <= 20; j++)
-				flag = flag && !(this->f[i][j] == this->f[i][j-1] || this->f[i][j] == this->f[i-1][j]);
+			    if (f[i][j])
+	    			flag = flag && !(this->f[i][j] == this->f[i][j-1] || this->f[i][j] == this->f[i-1][j]);
 		return flag;
 	}
 	
@@ -73,7 +74,10 @@ namespace mp{
 	void map::display(){
 		for (int i = 1; i <= 20; i++){
 			for (int j = 1; j <= 20; j++)
-				printf("%d", this->f[i][j]);
+			    if (f[i][j])
+				    printf("%d", this->f[i][j]);
+			    else
+			        putchar(' ');
 			printf("\n");
 		}
 	}

@@ -17,7 +17,7 @@ int main(){
         score_total += score; // compute total score
         board->display();
     }
-    printf("%d", score_total);
+    printf("your score is:%d\n", score_total);
 
     return 0;
 }
