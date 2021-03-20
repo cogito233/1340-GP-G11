@@ -69,4 +69,12 @@ namespace mp{
 				if (this->f[i][j]) sum-=100;
 		return sum<0 ? 0 : sum;
 	}
+
+	void map::display(){
+		for (int i = 1; i <= 20; i++){
+			for (int j = 1; j <= 20; j++)
+				printf("%d", this->f[i][j]);
+			printf("\n");
+		}
+	}
 }
