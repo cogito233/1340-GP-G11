@@ -17,6 +17,7 @@ namespace mp{
 			int operation(int x, int y);//以x,y为中心消除，返回该操作的得分
 			int reward_score();//返回当前游戏的奖励分
 			void display();//显示地图
+			void display_ncurses();//使用ncurses显示地图
 	};
 }
 #endif

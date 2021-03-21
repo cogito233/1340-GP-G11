@@ -3,10 +3,14 @@ FLAGS = -pedantic-errors -std=c++11
 
 # Build targets
 map.o: ../src/map.cpp ../src/map.h
-	g++ $(FLAGS) -c $<
+	g++ $(FLAGS) -lncurses -c $<
 
 main: ../src/main.cpp map.o
-	g++ $(FLAGS)  $^ -o $@
+	g++ $(FLAGS)  $^ -lncurses -o $@
+	@echo "~~Successful Compilation~~"
+
+main_ncurses: ../src/main_ncurses.cpp map.o
+	g++ $(FLAGS)  $^ -lncurses -o $@
 	@echo "~~Successful Compilation~~"
 
 # Delete all object codes & executable

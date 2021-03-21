@@ -1,4 +1,5 @@
 #include <bits/stdc++.h>
+#include <ncurses.h>
 #include "map.h"
 
 mp::map *board;
