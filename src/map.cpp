@@ -86,15 +86,14 @@ namespace mp{
 
 	//TODO
 	void map::display_ncurses(){
-		initscr();
+		move(0, 0);
 		for (int i = 1; i <= 20; i++){
-			for (int j = 1; j <= 20; j++){
-				if (f[i][j])                                                                           printw("%d", this->f[i][j]);                                           else                                                                                   printw(" ");
-				refresh();
-			}
+			for (int j = 1; j <= 20; j++)
+				if (f[i][j])
+				    printw("%d", this->f[i][j]);
+			    else
+			        printw(" ");
 			printw("\n");
 		}
-		getch();
-		endwin();
 	}		
 }
