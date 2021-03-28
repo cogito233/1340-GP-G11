@@ -1,5 +1,7 @@
 #include "map.h"
 #include <bits/stdc++.h>
+#include <ncurses.h>
+
 namespace mp{
 	void map::dfs(int x, int y, int colour, int &sum) {
 		this->f[x][y] = 0;
@@ -79,6 +81,19 @@ namespace mp{
 			    else
 			        putchar(' ');
 			printf("\n");
-		}
+		}		
 	}
+
+	//TODO
+	void map::display_ncurses(){
+		move(0, 0);
+		for (int i = 1; i <= 20; i++){
+			for (int j = 1; j <= 20; j++)
+				if (f[i][j])
+				    printw("%d", this->f[i][j]);
+			    else
+			        printw(" ");
+			printw("\n");
+		}
+	}		
 }
