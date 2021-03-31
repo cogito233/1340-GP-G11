@@ -73,8 +73,8 @@ namespace mp{
 		return sum<0 ? 0 : sum;
 	}
 
-	void map::display(){
-		for (int i = 1; i <= 20; i++){
+	void map::display() {
+		for (int i = 1; i <= 20; i++) {
 			for (int j = 1; j <= 20; j++)
 			    if (f[i][j])
 				    printf("%d", this->f[i][j]);
@@ -85,12 +85,21 @@ namespace mp{
 	}
 
 	//TODO
-	void map::display_ncurses(){
+	void map::display_ncurses() {
 		move(0, 0);
-		for (int i = 1; i <= 20; i++){
+
+		start_color();
+		init_pair(1, COLOR_RED, COLOR_BLACK);
+		init_pair(2, COLOR_BLUE, COLOR_BLACK);
+		init_pair(3, COLOR_GREEN, COLOR_BLACK);
+
+		for (int i = 1; i <= 20; i++) {
 			for (int j = 1; j <= 20; j++)
-				if (f[i][j])
-				    printw("%d", this->f[i][j]);
+				if (f[i][j]) {
+					attron(COLOR_PAIR(f[i][j]));
+					printw("%d", this->f[i][j]);
+					attroff(COLOR_PAIR(f[i][j]));
+				}
 			    else
 			        printw(" ");
 			printw("\n");
