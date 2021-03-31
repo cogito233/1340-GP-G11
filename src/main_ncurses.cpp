@@ -1,5 +1,5 @@
 #include <bits/stdc++.h>
-#include "ncurses.h"
+#include <ncurses.h>
 #include "map.h"
 
 mp::map *board;
@@ -16,7 +16,7 @@ int main() {
 	int x, y, score;
 	int score_total = 0;
 	
-	while (!board->is_end()){
+	while (!board->is_end()) {
 		getyx_(y, x);
 		score = board->operation(y+1, x+1);
 		score_total += score;
@@ -37,7 +37,7 @@ void getyx_(int &y, int &x) {
 
 	move(0, 0);
 
-	while (true){
+	while (true) {
         c = getch();
         getyx(stdscr, y, x);
         switch (c) {
