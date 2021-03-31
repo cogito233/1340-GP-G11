@@ -89,19 +89,17 @@ namespace mp{
 		move(0, 0);
 
 		start_color();
-		init_pair(1, COLOR_RED, COLOR_BLACK);
-		init_pair(2, COLOR_BLUE, COLOR_BLACK);
-		init_pair(3, COLOR_GREEN, COLOR_BLACK);
+		init_pair(0, COLOR_BLACK, COLOR_BLACK);
+		init_pair(1, COLOR_BLACK, COLOR_RED);
+		init_pair(2, COLOR_BLACK, COLOR_BLUE);
+		init_pair(3, COLOR_BLACK, COLOR_GREEN);
 
 		for (int i = 1; i <= 20; i++) {
-			for (int j = 1; j <= 20; j++)
-				if (f[i][j]) {
-					attron(COLOR_PAIR(f[i][j]));
-					printw("%d", this->f[i][j]);
-					attroff(COLOR_PAIR(f[i][j]));
-				}
-			    else
-			        printw(" ");
+			for (int j = 1; j <= 20; j++) {
+				attron(COLOR_PAIR(f[i][j]));
+				printw(" ", this->f[i][j]);
+				attroff(COLOR_PAIR(f[i][j]));
+			}
 			printw("\n");
 		}
 	}		
