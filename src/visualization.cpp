@@ -212,7 +212,7 @@ namespace vi{
 
     void game_interface::print_interface() {
         move(30,0);
-        printw("Your score: %d\n",this->board->reward_score());
+        printw("Your score: %d\n",this->board->now_score());
     }
 
     void game_interface::refresh() {

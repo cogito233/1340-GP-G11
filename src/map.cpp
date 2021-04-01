@@ -36,12 +36,15 @@ namespace mp{
 	}
 	
 	map::map() {
+        this->score = 0;
 		srand(time(0));
 		for (int i = 1; i <= 20; i++)
 			for (int j = 1; j <= 20; j++)
 				this->f[i][j] = rand() % 3 + 1;
 	}
-	
+    int map::now_score() {
+	    return this->score;
+	}
 	int map::map_query(int x,int y) {
 		return this->f[x][y];
 	}
@@ -61,7 +64,8 @@ namespace mp{
 			|| this->f[x][y] == this->f[x+1][y] || this->f[x][y] == this->f[x][y+1])) return -1;
 		int sum = 0;
 		this->dfs(x, y, this->f[x][y], sum);
-		this->normalization();	
+		this->normalization();
+        this->score += sum * sum * 5;
 		return sum * sum * 5;
 	}
 	

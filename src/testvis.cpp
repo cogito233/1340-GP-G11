@@ -1,5 +1,6 @@
 #include <bits/stdc++.h>
 #include "visualization.h"
+#include "map.h"
 using namespace std;
 //vi::game_interface *game;
 vi::pause_interface *load;

@@ -39,12 +39,12 @@ namespace vi{
         void print_map();
         void print_rank();
         void print_interface();
-        void refresh();
     public:
         game_interface(int round);
         int add_rank_info(std::string name, int score);
         void link_map(mp::map *mp);
         std::string keyboard_operation(int &y, int &x);
+        void refresh();
     };
 }
 #endif

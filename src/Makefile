@@ -4,7 +4,7 @@ FLAGS = -pedantic-errors -std=c++11 -I ~/local/include -I ~/local/include/ncurse
 # Build the game directly
 all:
 	@make clean
-	@make testvis
+	@make main_vis
 	@echo "Run the game with \`bin/game\`"
 
 # Build targets
@@ -16,7 +16,7 @@ visualization.o: visualization.cpp visualization.h map.o
 	@g++ $(FLAGS) -lncurses $< -c -o $@
 	@echo "~~ finish vis ~~"
 	
-testvis: testvis.cpp visualization.o map.o
+main_vis: main_vis.cpp visualization.o map.o
 	@g++ $(FLAGS) $^ -lncurses -o $@
 	@echo "~~ Successful Compilation ~~"
 
@@ -24,7 +24,7 @@ testvis: testvis.cpp visualization.o map.o
 clean: 
 	@rm -rf map.o
 	@rm -rf visualization.o
-	@rm -rf testvis
+	@rm -rf main_vis
 	@echo "Directories obj & bin cleaned"
 
 # Build ncurses
