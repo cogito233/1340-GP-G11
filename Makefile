@@ -5,7 +5,7 @@ FLAGS = -pedantic-errors -std=c++11 -I ~/local/include -I ~/local/include/ncurse
 all:
 	@make clean
 	@make bin/game
-	@echo "Run the game with `bin/game`"
+	@echo "Run the game with \`bin/game\`"
 
 # Build targets
 obj/map.o: src/map.cpp src/map.h
