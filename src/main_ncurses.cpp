@@ -17,18 +17,19 @@ int main() {
 	
 	while (!board->is_end()) {
 		getyx_(y, x);
-        printw("%d %d", y, x);
+		printw("%d %d", y, x);
 		score = board->operation(y+1, x);
 		score_total += score;
 		board ->display_ncurses();
 	}
 
-    move(21, 0);
-    printw("Game over. Press any key to exit.");
-    getch();
+	move(21, 0);
+	printw("Game over. Press any key to exit.\n");
+	
+	printw("Your score is: %d\n", score_total);
+
+	getch();
 	endwin();
-    
-	printf("Your score is:%d\n", score_total);
 
 	return 0;
 }
@@ -39,7 +40,8 @@ void getyx_(int &y, int &x) {
 	int c;
 	bool isChosen = false;
 
-	move(0, 0);
+        if (x != 0) x--;
+	move(y, x);
 
 	while (true) {
         c = getch();
@@ -48,24 +50,28 @@ void getyx_(int &y, int &x) {
             case KEY_UP:
                 if (y > 0)
                     move(y - 1, x);
+                y--;
                 break;
             case KEY_DOWN:
                 if (y < 19)
                     move(y + 1, x);
+                y++;
                 break;
             case KEY_LEFT:
                 if (x > 0)
                     move(y, x - 1);
+                x--;
                 break;
             case KEY_RIGHT:
                 if (x < 19)
                     move(y, x + 1);
+		x++;
                 break;
             case ' ':
-				isChosen = true;
+                isChosen = true;
                 break;
         }
-		if (isChosen)
-			break;
+        if (isChosen)
+                break;
     }
 }
