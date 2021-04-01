@@ -35,16 +35,16 @@ namespace vi{
 		private:
 			mp::map *board;
 			ranklist rk[10];
-			int ranker_num;
+			int ranker_num, round;
 			void print_map();
 			void print_rank();
 			void print_interface();
             void refresh();
 		public:
-			game_interface();
+			game_interface(int round);
 			int add_rank_info(string name, int score);
 			void link_map(mp::map *mp);
-			void keyboard_operation();
+			string keyboard_operation();
 	};
 }
 #endif
