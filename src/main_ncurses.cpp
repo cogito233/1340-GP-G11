@@ -8,7 +8,6 @@ void getyx_(int &y, int &x);
 
 int main() {
     initscr();
-    noecho();
     cbreak();
 	
 	board = new mp::map();
@@ -18,12 +17,17 @@ int main() {
 	
 	while (!board->is_end()) {
 		getyx_(y, x);
-		score = board->operation(y+1, x+1);
+        printw("%d %d", y, x);
+		score = board->operation(y+1, x);
 		score_total += score;
 		board ->display_ncurses();
 	}
 
+    move(21, 0);
+    printw("Game over. Press any key to exit.");
+    getch();
 	endwin();
+    
 	printf("Your score is:%d\n", score_total);
 
 	return 0;
@@ -57,7 +61,7 @@ void getyx_(int &y, int &x) {
                 if (x < 19)
                     move(y, x + 1);
                 break;
-            case KEY_BACKSPACE:
+            case ' ':
 				isChosen = true;
                 break;
         }

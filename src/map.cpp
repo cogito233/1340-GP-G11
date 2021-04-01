@@ -97,7 +97,7 @@ namespace mp{
 		for (int i = 1; i <= 20; i++) {
 			for (int j = 1; j <= 20; j++) {
 				attron(COLOR_PAIR(f[i][j]));
-				printw(" ", this->f[i][j]);
+				printw(" ");
 				attroff(COLOR_PAIR(f[i][j]));
 			}
 			printw("\n");
