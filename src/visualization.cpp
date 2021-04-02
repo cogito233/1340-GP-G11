@@ -51,7 +51,6 @@ namespace vi{
         move(0,0);
         printw("This is a Help.\n");
         printw("Press any key to exit.\n");
-        getch();
     }
 
     void load_interface::refresh(text_anchor a[], int n, int highlight) {

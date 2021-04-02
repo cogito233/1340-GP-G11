@@ -11,8 +11,10 @@ all:
 obj/map.o: src/map.cpp src/map.h
 	@mkdir obj
 	@g++ $(FLAGS) -lncurses $< -c -o $@
+
 obj/visualization.o: src/visualization.cpp src/visualization.h obj/map.o
 	@g++ $(FLAGS) -lncurses $< -c -o $@
+	
 bin/game: src/main_vis.cpp obj/map.o obj/visualization.o
 	@mkdir bin
 	@echo "Compiling sources..."

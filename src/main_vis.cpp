@@ -61,11 +61,10 @@ signed main() {
 
     move(21, 0);
     printw("Game over. Press any key to exit.\n");
-
-    printw("Your score is: %d\n", score_total);
-
     getch();
     endwin();
+
+    printf("Your score is: %d\n", score_total);
 
     return 0;
 }
