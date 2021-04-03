@@ -23,7 +23,6 @@ signed main() {
         string s = load->get_order();
         if (s == "New_Game") flag_load = 0;
         if (s == "End_Game"){
-            getch();
             endwin();
             return 0;
         }

@@ -247,48 +247,19 @@ namespace vi{
 
     std::string game_interface::keyboard_operation(int &y, int &x) {
         keypad(stdscr, true);
-
-        int c;
-        bool isChosen = false;
-
-        if (x != 0) x--;
-        move(y, x);
+        mousemask(ALL_MOUSE_EVENTS, NULL);
+        MEVENT event;
+        int ch;
 
         while (true) {
-            c = getch();
-            getyx(stdscr, y, x);
-            switch (c) {
-                case KEY_UP:
-                    if (y > 0)
-                        move(y - 1, x);
-                    y--;
-                    break;
-                case KEY_DOWN:
-                    if (y < 19)
-                        move(y + 1, x);
-                    y++;
-                    break;
-                case KEY_LEFT:
-                    if (x > 0)
-                        move(y, x - 1);
-                    x--;
-                    break;
-                case KEY_RIGHT:
-                    if (x < 19)
-                        move(y, x + 1);
-                    x++;
-                    break;
-                case ' ':
-                    isChosen = true;
-                    break;
-                case 27:
-                    return "Pause";
-                    break;
-            }
-            if (isChosen)
-                break;
+            ch = getch();
+            if (ch == KEY_MOUSE)
+                if (getmouse(&event) == OK) {
+                    y = event.y;
+                    x = event.x + 1;
+                    return "Chosen";
+                }
         }
-        return "Chosen";
     }//TODO
     //class game_interface
 }
