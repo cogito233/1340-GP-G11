@@ -156,11 +156,7 @@ namespace vi{
         move(30, 0);
 
         int c = getch();
-        while (c != ' ' || highlight == 2) {
-            while (c == ' ' && highlight == 2) {
-                this->Help();
-                c = getch();
-            }
+        while (c != ' ') {
             if (c == KEY_UP) highlight = this->pause[highlight].direct[0];
             if (c == KEY_DOWN) highlight = this->pause[highlight].direct[1];
             if (c == KEY_LEFT) highlight = this->pause[highlight].direct[2];
@@ -172,6 +168,7 @@ namespace vi{
         }
         if (highlight == 0) return "New_Game";
         if (highlight == 3) return "End_Game";
+        if (highlight == 2) this->Help();
         if (highlight == 4) return "Continue";
         if (highlight == 1) {
             return "Load "+this->save_or_load("Load form: ");
@@ -266,7 +263,7 @@ namespace vi{
                 x = event.x;
                 return "Chosen";
             }
-            else if (ch == 'P')
+            else if (ch == 'p')
                 return "Pause";
         }
     }
@@ -283,7 +280,6 @@ namespace vi{
                         y --;
                     break;
                 case KEY_DOWN:
-                    printw("%d", y);
                     if (y < 19)
                         y ++;
                     break;
