@@ -15,11 +15,13 @@ namespace mp{
 		if (this->f[x][y+1] == colour)
 			this->dfs(x, y+1, colour, sum);
 	}
+	
 	void map::copy_column(int x,int y) {
 		if (x == y) return;
 		for (int i = 1; i <= 20; i++)
 			this->f[i][x] = this->f[i][y];
 	}
+
 	void map::normalization(){
 		for (int j = 1; j <= 20; j++) {
 			int k = 21;
@@ -42,9 +44,11 @@ namespace mp{
 			for (int j = 1; j <= 20; j++)
 				this->f[i][j] = rand() % 3 + 1;
 	}
+
     int map::now_score() {
 	    return this->score;
 	}
+
 	int map::map_query(int x,int y) {
 		return this->f[x][y];
 	}
@@ -68,14 +72,6 @@ namespace mp{
         this->score += sum * sum * 5;
 		return sum * sum * 5;
 	}
-	
-	int map::reward_score() {
-		int sum=1000;
-		for (int i = 1; i <= 20; i++)
-			for (int j = 1; j <= 20; j++)
-				if (this->f[i][j]) sum-=100;
-		return sum<0 ? 0 : sum;
-	}
 
 	void map::display() {
 		for (int i = 1; i <= 20; i++) {
@@ -87,24 +83,4 @@ namespace mp{
 			printf("\n");
 		}		
 	}
-
-	//TODO
-	void map::display_ncurses() {
-		move(0, 0);
-
-		start_color();
-		init_pair(0, COLOR_BLACK, COLOR_BLACK);
-		init_pair(1, COLOR_BLACK, COLOR_RED);
-		init_pair(2, COLOR_BLACK, COLOR_BLUE);
-		init_pair(3, COLOR_BLACK, COLOR_GREEN);
-
-		for (int i = 1; i <= 20; i++) {
-			for (int j = 1; j <= 20; j++) {
-				attron(COLOR_PAIR(f[i][j]));
-				printw(" ");
-				attroff(COLOR_PAIR(f[i][j]));
-			}
-			printw("\n");
-		}
-	}		
 }
