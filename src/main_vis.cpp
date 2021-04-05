@@ -19,9 +19,11 @@ signed main() {
     game = new vi::game_interface(round);
     load = new vi::load_interface();
     bool flag_load = 1;
+    string s;
     while (flag_load) {
-        string s = load->get_order();
-        if (s == "New_Game") flag_load = 0;
+        s = load->get_order();
+        if (s == "New_Game_Cli" || s == "New_Game_Key") 
+            flag_load = 0;
         if (s == "End_Game"){
             endwin();
             return 0;
@@ -29,10 +31,15 @@ signed main() {
     }
     int x = 0, y = 0, score;
     int score_total = 0;
+    string str;
+    bool isCli = (s == "New_Game_Cli");
+
     game->link_map(board);
     game->refresh();
     while (!board->is_end()) {
-        string str = game->keyboard_operation(y, x);
+        if (isCli) str = game->mouse_operation(y, x);
+        else str = game->keyboard_operation(y, x);
+
         if (str == "Pause") {
             bool flag_pause = 1;
             while (flag_pause) {
@@ -55,7 +62,7 @@ signed main() {
             continue;
         }
         //printw("%d %d", y, x);
-        score = board->operation(y+1, x);
+        score = board->operation(y+1, x+1);
         score_total += score;
         game->refresh();
     }

@@ -9,22 +9,24 @@ namespace vi{
         keypad(stdscr, true);
         start_color();
 
-        this->load[0].text = "New_Game";
-        this->load[1].text = "  Load  ";
-        this->load[2].text = "  Help  ";
-        this->load[3].text = "End_Game";
+        this->load[0].text = " New_Game ";
+        this->load[1].text = "Click Mode";
+        this->load[2].text = "   Load   ";
+        this->load[3].text = "   Help   ";
+        this->load[4].text = " End_Game ";
 
-        this->load[0].x = 5; this->load[0].y = 50;
-        this->load[1].x = 10; this->load[1].y = 50;
-        this->load[2].x = 15; this->load[2].y = 50;
-        this->load[3].x = 20; this->load[3].y = 50;
+        this->load[0].x = 4; this->load[0].y = 50;
+        this->load[1].x = 8; this->load[1].y = 50;
+        this->load[2].x = 12; this->load[2].y = 50;
+        this->load[3].x = 16; this->load[3].y = 50;
+        this->load[4].x = 20; this->load[4].y = 50;
 
-        int a[4][4]={{0,1,0,0},{0,2,1,1},{1,3,2,2},{2,3,3,3}};
-        for (int i = 0; i < 4; i++)
+        int a[5][4]={{0,1,0,0},{0,2,1,1},{1,3,2,2},{2,4,3,3}, {3, 4, 4, 4}};
+        for (int i = 0; i < 5; i++)
             for (int j = 0; j < 4; j++)
                 this->load[i].direct[j] = a[i][j];
 
-        this->refresh(load, 4, 0);
+        this->refresh(load, 5, 0);
         printw("233");
     }
     std::string load_interface::save_or_load(std::string s) {
@@ -51,6 +53,7 @@ namespace vi{
         move(0,0);
         printw("This is a Help.\n");
         printw("Press any key to exit.\n");
+        getch();
     }
 
     void load_interface::refresh(text_anchor a[], int n, int highlight) {
@@ -87,29 +90,34 @@ namespace vi{
     std::string load_interface::get_order() {
 
         int highlight = 0;
-        this->refresh(load,4,highlight);
+        this->refresh(load, 5, highlight);
         move(30, 0);
 
         int c = getch();
-        while (c != ' ' || highlight == 2) {
-            while (c == ' ' && highlight == 2) {
-                this->Help();
-                c = getch();
-            }
+        while (c != ' ') {
             if (c == KEY_UP) highlight = this->load[highlight].direct[0];
             if (c == KEY_DOWN) highlight = this->load[highlight].direct[1];
             if (c == KEY_LEFT) highlight = this->load[highlight].direct[2];
-            if (c == KEY_RIGHT) highlight = this->load[highlight].direct[3];
+            if (c == KEY_RIGHT) highlight = this ->load[highlight].direct[3];
             printw("%d",highlight);
-            this->refresh(load,4,highlight);
+            this->refresh(load, 5, highlight);
             move(30, 0);
             c = getch();
         }
-        if (highlight == 0) return "New_Game";
-        if (highlight == 3) return "End_Game";
+        if (highlight == 0) {
+            if (this->load[1].text == " Key Mode ") return "New_Game_Key";
+            else return "New_Game_Cli";
+        } 
         if (highlight == 1) {
-            return "Load "+this->save_or_load("Load form: ");
+            if (this->load[highlight].text == " Key Mode ")
+                this->load[highlight].text = "Click Mode";
+            else 
+                this->load[highlight].text = " Key Mode ";
         }
+        if (highlight == 2) return "Load "+ this->save_or_load("Load form: ");
+        if (highlight == 3) this->Help();
+        if (highlight == 4) return "End_Game";
+        
         return "Error";
     }
     //class load_interface
@@ -245,7 +253,7 @@ namespace vi{
         this->board = mp;
     }
 
-    std::string game_interface::keyboard_operation(int &y, int &x) {
+    std::string game_interface::mouse_operation(int &y, int &x) {
         keypad(stdscr, true);
         mousemask(ALL_MOUSE_EVENTS, NULL);
         MEVENT event;
@@ -255,12 +263,44 @@ namespace vi{
             ch = getch();
             if (ch == KEY_MOUSE && getmouse(&event) == OK) {
                 y = event.y;
-                x = event.x + 1;
+                x = event.x;
                 return "Chosen";
             }
-            else if (ch == ' ')
+            else if (ch == 'P')
                 return "Pause";
         }
-    }//TODO
-    //class game_interface
+    }
+
+    std::string game_interface::keyboard_operation(int &y, int &x) {
+        keypad(stdscr, true);
+        int ch;
+        
+        while (true){
+            ch = getch();
+            switch (ch) {
+                case KEY_UP:
+                    if (y > 0)
+                        y --;
+                    break;
+                case KEY_DOWN:
+                    printw("%d", y);
+                    if (y < 19)
+                        y ++;
+                    break;
+                case KEY_LEFT:
+                    if (x > 0)
+                        x--;
+                    break;
+                case KEY_RIGHT:
+                    if (x < 19)
+                        x++;
+                    break;
+                case ' ':
+                    return "Chosen";
+                case 'p':
+                    return "Pause";
+            }
+            move(y, x);
+        }
+    }
 }

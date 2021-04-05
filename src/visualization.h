@@ -14,9 +14,9 @@ namespace vi{
         int direct[4];
         std::string text;
     };
-	class load_interface{//Load,New_Game,End_Game,Help
+	class load_interface{//Load, Game Mode, New_Game, End_Game, Help
 		private:
-            text_anchor load[4];
+            text_anchor load[5];
         public:
             std::string save_or_load(std::string s);
             void Help();
@@ -43,6 +43,7 @@ namespace vi{
         game_interface(int round);
         int add_rank_info(std::string name, int score);
         void link_map(mp::map *mp);
+        std::string mouse_operation(int &y, int &x);
         std::string keyboard_operation(int &y, int &x);
         void refresh();
     };
