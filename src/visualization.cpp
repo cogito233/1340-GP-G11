@@ -253,12 +253,13 @@ namespace vi{
 
         while (true) {
             ch = getch();
-            if (ch == KEY_MOUSE)
-                if (getmouse(&event) == OK) {
-                    y = event.y;
-                    x = event.x + 1;
-                    return "Chosen";
-                }
+            if (ch == KEY_MOUSE && getmouse(&event) == OK) {
+                y = event.y;
+                x = event.x + 1;
+                return "Chosen";
+            }
+            else if (ch == ' ')
+                return "Pause";
         }
     }//TODO
     //class game_interface

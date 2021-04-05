@@ -37,7 +37,10 @@ signed main() {
             bool flag_pause = 1;
             while (flag_pause) {
                 string s = pause->get_order();
-                if (s == "Continue") flag_pause = 0;
+                if (s == "Continue") {
+                    flag_pause = 0;
+                    game->refresh();
+                }
                 if (s == "New_Game") {
                     delete board;
                     board =new mp::map();
@@ -45,7 +48,6 @@ signed main() {
                     flag_pause = 0;
                 }
                 if (s == "End_Game"){
-                    getch();
                     endwin();
                     return 0;
                 }
