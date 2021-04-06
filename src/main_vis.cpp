@@ -20,6 +20,8 @@ signed main() {
     pause = new vi::pause_interface();
     game = new vi::game_interface(round);
     load = new vi::load_interface();
+    cur_map = new sl::current_map(board, round);
+    
     bool flag_load = 1;
     string s;
     while (flag_load) {
@@ -31,7 +33,7 @@ signed main() {
             return 0;
         }
         if (s.find("Load") != std::string::npos) 
-            cur_map->load(board, round, s.substr(5));
+            cur_map->load(s.substr(5));
     }
     int x = 0, y = 0, score;
     int score_total = 0;
@@ -63,10 +65,10 @@ signed main() {
                     return 0;
                 }
                 if (s.find("Save") != std::string::npos) 
-                    cur_map->save(board, round, s.substr(5));
+                    cur_map->save(s.substr(5));
                     
                 if (s.find("Load") != std::string::npos) 
-                    cur_map->load(board, round, s.substr(5));
+                    cur_map->load(s.substr(5));
             }
             continue;
         }

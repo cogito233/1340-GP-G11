@@ -1,7 +1,12 @@
 #include "saveAndLoad.h"
 
 namespace sl {
-    int current_map::save(mp::map *board, int round, std::string name) {
+    current_map::current_map(mp::map *board, int &round) {
+        this->board = board;
+        this->round = round;
+    }
+
+    int current_map::save(std::string name) {
         // Find current time and store it in buffer
         time_t rawtime;
         struct tm * timeinfo;
@@ -18,18 +23,18 @@ namespace sl {
         fout.open(filename);
 
         if (fout.fail()) {
-            printf("Store operation failed:\ncannot open file %s", filename.c_str());
+            printf("Store operation failed:\ncannot open file %s\n", filename.c_str());
             return 1;
         }
 
         for (int i = 1; i <= 20; i++) {
             for (int j = 1; j <= 20; j++)
-                fout << board->map_query(i, j) << ' ';
+                fout << this->board->map_query(i, j) << ' ';
             fout << std::endl;
         }
 
-        fout << board->now_score() << std::endl;
-        fout << round << std::endl;
+        fout << this->board->now_score() << std::endl;
+        fout << this->round << std::endl;
 
         fout.close();
 
@@ -40,7 +45,7 @@ namespace sl {
         return 0;
     }
 
-    int current_map::load(mp::map *board, int &round, std::string name) {
+    int current_map::load(std::string name) {
         int val;
         std::ifstream fin;
         std::string filename = "log/" + name;
@@ -54,11 +59,11 @@ namespace sl {
         for (int i = 1; i <= 20; i++) 
             for (int j = 1; j <= 20; j++) {
                 fin >> val;
-                board->map_set(i, j, val);
+                this->board->map_set(i, j, val);
             }
         fin >> val;
-        board->score_set(val);
-        fin >> round;
+        this->board->score_set(val);
+        fin >> this->round;
         
         fin.close();
 

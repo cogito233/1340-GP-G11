@@ -14,9 +14,13 @@ namespace sl{
     };
     
     class current_map {
+        private:
+            mp::map *board;
+            int round;
         public:
-            int save(mp::map *board, int round, std::string name);
-            int load(mp::map *board, int &round, std::string name);
+            current_map(mp::map *board, int &round);
+            int save(std::string name);
+            int load(std::string filename);
     };
 }
 
