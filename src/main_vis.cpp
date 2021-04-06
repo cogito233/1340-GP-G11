@@ -1,6 +1,7 @@
 #include <bits/stdc++.h>
-#include "visualization.h"
 #include <ncurses.h>
+#include "visualization.h"
+#include "saveAndLoad.h"
 #include "map.h"
 using namespace std;
 
@@ -8,6 +9,7 @@ mp::map *board;
 vi::game_interface *game;
 vi::load_interface *load;
 vi::pause_interface *pause;
+sl::current_map *cur_map;
 
 signed main() {
     initscr();
@@ -50,13 +52,19 @@ signed main() {
                 }
                 if (s == "New_Game") {
                     delete board;
-                    board =new mp::map();
+                    board = new mp::map();
                     game->refresh();
                     flag_pause = 0;
                 }
                 if (s == "End_Game"){
                     endwin();
                     return 0;
+                }
+                if (s.find("Save") != std::string::npos) {
+                    cur_map->save(board, round, s.substr(5));
+                    move(1, 0);
+                    printw("Save success! Press any key to quit.\n");
+                    getch();
                 }
             }
             continue;
