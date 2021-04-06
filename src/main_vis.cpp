@@ -30,6 +30,8 @@ signed main() {
             endwin();
             return 0;
         }
+        if (s.find("Load") != std::string::npos) 
+            cur_map->load(board, round, s.substr(5));
     }
     int x = 0, y = 0, score;
     int score_total = 0;
@@ -60,12 +62,11 @@ signed main() {
                     endwin();
                     return 0;
                 }
-                if (s.find("Save") != std::string::npos) {
+                if (s.find("Save") != std::string::npos) 
                     cur_map->save(board, round, s.substr(5));
-                    move(1, 0);
-                    printw("Save success! Press any key to quit.\n");
-                    getch();
-                }
+                    
+                if (s.find("Load") != std::string::npos) 
+                    cur_map->load(board, round, s.substr(5));
             }
             continue;
         }

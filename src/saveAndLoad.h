@@ -6,6 +6,7 @@
 #include <string>
 #include <fstream>
 #include <time.h>
+#include <ncurses.h>
 
 namespace sl{
     class rank_list {
@@ -13,13 +14,9 @@ namespace sl{
     };
     
     class current_map {
-        private:
-            void mapInfo();
-            void scoreInfo();
-            void roundInfo();
         public:
             int save(mp::map *board, int round, std::string name);
-            int load(mp::map *board, int &round, std::string &name);
+            int load(mp::map *board, int &round, std::string name);
     };
 }
 

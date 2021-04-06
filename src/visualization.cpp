@@ -114,7 +114,7 @@ namespace vi{
             else 
                 this->load[highlight].text = " Key Mode ";
         }
-        if (highlight == 2) return "Load "+ this->save_or_load("Load form: ");
+        if (highlight == 2) return "Load "+ this->save_or_load("Load from (input filename): ");
         if (highlight == 3) this->Help();
         if (highlight == 4) return "End_Game";
         
@@ -171,7 +171,7 @@ namespace vi{
         if (highlight == 2) this->Help();
         if (highlight == 4) return "Continue";
         if (highlight == 1) {
-            return "Load "+this->save_or_load("Load form: ");
+            return "Load "+this->save_or_load("Load from (input filename): ");
         }
         if (highlight == 5) {
             return "Save "+this->save_or_load("Save as: ");

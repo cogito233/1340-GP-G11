@@ -49,8 +49,16 @@ namespace mp{
 	    return this->score;
 	}
 
+	void map::score_set(int val) {
+		this->score = val;
+	}
+
 	int map::map_query(int x,int y) {
 		return this->f[x][y];
+	}
+
+	void map::map_set(int x, int y, int val) {
+		this->f[x][y] = val;
 	}
 	
 	bool map::is_end() {
