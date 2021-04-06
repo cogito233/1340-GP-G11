@@ -269,9 +269,10 @@ namespace vi{
     }
 
     std::string game_interface::keyboard_operation(int &y, int &x) {
+        move(y, x);
         keypad(stdscr, true);
         int ch;
-        
+	
         while (true){
             ch = getch();
             switch (ch) {
