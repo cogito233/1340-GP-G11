@@ -184,8 +184,7 @@ namespace vi{
         keypad(stdscr, true);
         start_color();
 
-        this->ranker_num = 0;
-        this->round = round;
+        // this->rank->round_set(round);
     }
 
     void game_interface::print_map() {
@@ -206,14 +205,6 @@ namespace vi{
         }
     }
 
-    void game_interface::print_rank() {
-        move(0, 50);
-        for (int i = 0; i < this->ranker_num; i++) {
-            printw("%s", this->rk[i].name.c_str());
-            printw(": %d\n", this->rk[i].score);
-        }
-    }
-
     void game_interface::print_interface() {
         move(30,0);
         printw("Your score: %d\n",this->board->now_score());
@@ -224,30 +215,15 @@ namespace vi{
 
         this->print_map();
         this->print_interface();
-        this->print_rank();
-    }
-
-    int game_interface::add_rank_info(std::string name, int score) {
-        if (name.length()>8){
-            return 0;
-        }
-        this->ranker_num++;
-        this->rk[ranker_num].name = name;
-        this->rk[ranker_num].score = score;
-        for (int i = ranker_num-1; i >=1; i--) {
-            if (this->rk[i].score > this->rk[i-1].score) {
-                ranklist k = rk[i];
-                rk[i] = rk[i-1];
-                rk[i-1] = k;
-            } else {
-                break;
-            }
-        }
-        return 1;
+        this->rank->print_rank();
     }
 
     void game_interface::link_map(mp::map *mp) {
         this->board = mp;
+    }
+
+    void game_interface::link_rank(sl::rank_list *rank_list) {
+        this->rank = rank_list;
     }
 
     std::string game_interface::mouse_operation(int &y, int &x) {

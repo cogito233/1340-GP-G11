@@ -2,13 +2,11 @@
 #define vis_h
 
 #include <ncurses.h>
-#include "map.h"
 #include <string>
+#include "saveAndLoad.h"
+#include "map.h"
+
 namespace vi{
-    struct ranklist{
-        std::string name;
-        int score;
-    };
     struct text_anchor{
         int x,y;
         int direct[4];
@@ -34,15 +32,13 @@ namespace vi{
     class game_interface{
     private:
         mp::map *board;
-        ranklist rk[10];
-        int ranker_num, round;
+        sl::rank_list *rank;
         void print_map();
-        void print_rank();
         void print_interface();
     public:
         game_interface(int round);
-        int add_rank_info(std::string name, int score);
         void link_map(mp::map *mp);
+        void link_rank(sl::rank_list *rank);
         std::string mouse_operation(int &y, int &x);
         std::string keyboard_operation(int &y, int &x);
         void refresh();

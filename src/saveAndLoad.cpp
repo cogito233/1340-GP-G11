@@ -1,6 +1,73 @@
 #include "saveAndLoad.h"
 
 namespace sl {
+    rank_list::rank_list(std::string filename) {
+        this->filename = "log/" + filename;
+        std::ifstream fin (this->filename.c_str());
+
+        std::string name;
+        int score;
+        this->ranker_num = 0;
+
+        if (fin.fail()) {
+            move(0, 50);
+            printw("Cannot load log/%s", filename.c_str());
+            return;
+        }
+        
+        while (fin >> name) {
+            fin >> score;
+            if (name.length() <= 10) 
+                add(name, score);
+        }
+        fin.close();
+    }
+    
+    void rank_list::sort() {
+        for (int i = ranker_num; i > 0; i--) {
+            if (this->rk[i].score > this->rk[i-1].score) {
+                ranklist k = this->rk[i];
+                this->rk[i] = this->rk[i-1];
+                this->rk[i-1] = k;
+            } 
+            else 
+                break;
+        }
+    }
+    
+    void rank_list::add(std::string name, int score) {
+        this->rk[ranker_num].name = name;
+        this->rk[ranker_num].score = score;
+        this->sort();
+        this->ranker_num++;
+    } 
+
+    int rank_list::save() {
+        std::ofstream fout;
+        fout.open(this->filename);
+
+        if (fout.fail()) {
+            move(0, 50);
+            printw("Store operation failed:\ncannot open file %s\n", filename.c_str());
+            return 1;
+        }
+
+        for (int i = 0; i < this->ranker_num; i++) 
+            fout << this->rk[i].name << ' ' << this->rk[i].score << std::endl;
+
+        fout.close();
+        return 0;
+    }
+
+    void rank_list::print_rank() {
+        for (int i = 0; i < this->ranker_num; i++) {
+            move(i, 25);
+            printw("%s", this->rk[i].name.c_str());
+            move(i, 35);
+            printw(" %d\n", this->rk[i].score);
+        }
+    }
+
     current_map::current_map(mp::map *board, int &round) {
         this->board = board;
         this->round = round;
@@ -23,7 +90,8 @@ namespace sl {
         fout.open(filename);
 
         if (fout.fail()) {
-            printf("Store operation failed:\ncannot open file %s\n", filename.c_str());
+            move(0, 50);
+            printw("Store operation failed:\ncannot open file %s\n", filename.c_str());
             return 1;
         }
 
@@ -52,7 +120,8 @@ namespace sl {
         fin.open(filename.c_str());
 
         if (fin.fail()) {
-            printf("Store operation failed:\ncannot open file %s", filename.c_str());
+            move(0, 50);
+            printw("Store operation failed:\ncannot open file %s", filename.c_str());
             return 1;
         }
 
