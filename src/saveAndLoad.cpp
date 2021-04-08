@@ -10,8 +10,10 @@ namespace sl {
         this->ranker_num = 0;
 
         if (fin.fail()) {
-            move(0, 50);
-            printw("Cannot load log/%s", filename.c_str());
+            move(25, 0);
+            printw("Cannot load log/%s\n", filename.c_str());
+            printw("Press any key to exit.");
+            getch();
             return;
         }
         
@@ -47,8 +49,10 @@ namespace sl {
         fout.open(this->filename);
 
         if (fout.fail()) {
-            move(0, 50);
+            move(25, 0);
             printw("Store operation failed:\ncannot open file %s\n", filename.c_str());
+            printw("Press any key to exit.");
+            getch();
             return 1;
         }
 
@@ -90,8 +94,10 @@ namespace sl {
         fout.open(filename);
 
         if (fout.fail()) {
-            move(0, 50);
-            printw("Store operation failed:\ncannot open file %s\n", filename.c_str());
+            move(0, 1);
+            printw("Store operation failed: cannot open file %s\n", filename.c_str());
+            printw("Press any key to exit.");
+            getch();
             return 1;
         }
 
@@ -120,8 +126,10 @@ namespace sl {
         fin.open(filename.c_str());
 
         if (fin.fail()) {
-            move(0, 50);
-            printw("Store operation failed:\ncannot open file %s", filename.c_str());
+            move(1, 0);
+            printw("Load operation failed: cannot open file %s\n", filename.c_str());
+            printw("Press any key to exit.");
+            getch();
             return 1;
         }
 
