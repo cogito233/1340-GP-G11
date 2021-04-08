@@ -10,22 +10,31 @@ all:
 # Build targets
 obj/map.o: src/map.cpp src/map.h
 	@mkdir obj
-	@g++ $(FLAGS) -lncurses $< -c -o $@
+	@g++ $(FLAGS) -lncurses $< -g -c -o $@
 
 obj/visualization.o: src/visualization.cpp src/visualization.h obj/map.o
-	@g++ $(FLAGS) -lncurses $< -c -o $@
-	
-bin/game: src/main_vis.cpp obj/map.o obj/visualization.o
+	@g++ $(FLAGS) -lncurses $< -g -c -o $@
+
+obj/saveAndLoad.o: src/saveAndLoad.cpp src/saveAndLoad.h obj/map.o obj/visualization.o
+	@g++ $(FLAGS) -lncurses $< -g -c -o $@
+
+bin/game: src/main_vis.cpp obj/map.o obj/visualization.o obj/saveAndLoad.o
 	@mkdir bin
 	@echo "Compiling sources..."
-	@g++ $(FLAGS) $^ -lncurses -o $@
+	@g++ $(FLAGS) $^ -lncurses -g -o $@
 	@echo "~~ Successful Compilation ~~"
+	@mkdir -p log
 
 # Delete all object codes & executable
 clean: 
 	@rm -rf obj
 	@rm -rf bin
 	@echo "Directories obj & bin cleaned"
+
+# Clean game records
+clean-log:
+	@rm -rf log
+	@echo "Cleaned all game records"
 
 # Build ncurses
 ncurses: 
@@ -34,4 +43,4 @@ ncurses:
 	@./get.sh
 	@echo "Installed Successfully"
 
-.PHONY: clean ncurses
+.PHONY: clean clean-log ncurses
