@@ -232,6 +232,7 @@ namespace vi{
         MEVENT event;
         int ch;
 
+        move(0, 0);
         while (true) {
             ch = getch();
             if (ch == KEY_MOUSE && getmouse(&event) == OK) {
@@ -248,6 +249,7 @@ namespace vi{
         keypad(stdscr, true);
         int ch;
         
+        move(y, x);
         while (true){
             ch = getch();
             switch (ch) {

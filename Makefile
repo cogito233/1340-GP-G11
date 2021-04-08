@@ -24,7 +24,6 @@ bin/game: src/main_vis.cpp obj/map.o obj/visualization.o obj/saveAndLoad.o
 	@g++ $(FLAGS) $^ -lncurses -g -o $@
 	@echo "~~ Successful Compilation ~~"
 	@mkdir -p log
-	@touch __rank__.txt
 
 # Delete all object codes & executable
 clean: 

@@ -85,7 +85,7 @@ signed main() {
     }
 
     move(21, 0);
-    printw("Game over\nTo display your score on the leaderboard, \ninput your preferred name here:");
+    printw("Game over\nTo display your score on the leaderboard, \nInput your preferred name here: ");
     
     char c = getch();
     std::string name = "";
