@@ -31,13 +31,15 @@ namespace vi{
     };
     class game_interface{
     private:
+        int round = 0;
         mp::map *board;
         sl::rank_list *rank;
         void print_map();
         void print_interface();
     public:
-        game_interface(int round);
+        game_interface();
         void link_map(mp::map *mp);
+        void set_round(int round);
         void link_rank(sl::rank_list *rank);
         std::string mouse_operation(int &y, int &x);
         std::string keyboard_operation(int &y, int &x);

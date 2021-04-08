@@ -64,15 +64,17 @@ namespace sl {
     }
 
     void rank_list::print_rank() {
+        move(0,25);
+        printw("Rank List:");
         for (int i = 0; i < this->ranker_num; i++) {
-            move(i, 25);
+            move(i+2, 25);
             printw("%s", this->rk[i].name.c_str());
-            move(i, 35);
+            move(i+2, 35);
             printw(" %d\n", this->rk[i].score);
         }
     }
 
-    current_map::current_map(mp::map *board, int &round) {
+    current_map::current_map(mp::map *board, int round) {
         this->board = board;
         this->round = round;
     }
@@ -149,5 +151,8 @@ namespace sl {
         getch();
 
         return 0;       
+    }
+    int current_map::get_round() {
+        return this->round;
     }
 }

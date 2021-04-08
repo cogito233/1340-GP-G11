@@ -11,18 +11,27 @@ vi::load_interface *load;
 vi::pause_interface *pause;
 sl::current_map *cur_map;
 sl::rank_list *rank_list;
+void end_game(){
+    delete board;
+    delete game;
+    delete load;
+    delete pause;
+    delete cur_map;
+    delete rank_list;
+}
 
 signed main() {
     initscr();
     cbreak();
 
-    int round = 0;
+    int round = 1;
     std::string rank_name = "__rank__.txt";
 
     board = new mp::map();
     rank_list = new sl::rank_list(rank_name);
     pause = new vi::pause_interface();
-    game = new vi::game_interface(round);
+    game = new vi::game_interface();
+    game->set_round(1);
     load = new vi::load_interface();
     cur_map = new sl::current_map(board, round);
 
@@ -31,9 +40,10 @@ signed main() {
 
     while (flag_load) {
         s = load->get_order();
-        if (s == "New_Game_Cli" || s == "New_Game_Key") 
+        if (s == "New_Game_Cli" || s == "New_Game_Key")
             flag_load = 0;
         if (s == "End_Game"){
+            end_game();
             endwin();
             return 0;
         }
@@ -48,42 +58,67 @@ signed main() {
     game->link_map(board);
     game->link_rank(rank_list);
     game->refresh();
-    while (!board->is_end()) {
-        if (isCli) str = game->mouse_operation(y, x);
-        else str = game->keyboard_operation(y, x);
 
-        if (str == "Pause") {
-            bool flag_pause = 1;
-            while (flag_pause) {
-                string s = pause->get_order();
-                if (s == "Continue") {
-                    flag_pause = 0;
-                    game->refresh();
+    while (1) {
+        while (!board->is_end()) {
+            if (isCli) str = game->mouse_operation(y, x);
+            else str = game->keyboard_operation(y, x);
+
+            if (str == "Pause") {
+                bool flag_pause = 1;
+                while (flag_pause) {
+                    string s = pause->get_order();
+                    if (s == "Continue") {
+                        flag_pause = 0;
+                        game->refresh();
+                    }
+                    if (s == "New_Game") {
+                        delete board;
+                        board = new mp::map();
+                        delete cur_map;
+                        cur_map = new sl::current_map(board, 1);
+                        game->set_round(1);
+
+                        game->refresh();
+                        flag_pause = 0;
+                    }
+                    if (s == "End_Game") {
+                        endwin();
+                        end_game();
+                        return 0;
+                    }
+                    if (s.find("Save") != std::string::npos)
+                        cur_map->save(s.substr(5));
+
+                    if (s.find("Load") != std::string::npos)
+                        cur_map->load(s.substr(5));
                 }
-                if (s == "New_Game") {
-                    delete board;
-                    board = new mp::map();
-                    game->refresh();
-                    flag_pause = 0;
-                }
-                if (s == "End_Game"){
-                    endwin();
-                    return 0;
-                }
-                if (s.find("Save") != std::string::npos) 
-                    cur_map->save(s.substr(5));
-                    
-                if (s.find("Load") != std::string::npos) 
-                    cur_map->load(s.substr(5));
+                continue;
             }
-            continue;
+
+            score = board->operation(y + 1, x + 1);
+            //score_total += score;
+            game->refresh();
         }
 
-        score = board->operation(y+1, x+1);
-        score_total += score;
-        game->refresh();
-    }
+        int now_round = cur_map->get_round();
+        int target_score = now_round * 24000 + 2000 * now_round * (now_round - 1) / 2;
+        int now_score = board->now_score();
+        if (now_score < target_score) {
+            move(10, 0);
+            printw("Sadly, the target score was %d and you got %d", target_score, now_score);
+            break;
+        }
+        delete board;
+        board = new mp::map();
+        delete cur_map;
+        cur_map = new sl::current_map(board, now_round + 1);
+        game->set_round(now_round + 1);
+        board->score_set(now_score);
 
+        game->refresh();
+        //flag_pause = 0;
+    }
     move(21, 0);
     printw("Game over\nTo display your score on the leaderboard, \nInput your preferred name here: ");
     
@@ -95,7 +130,7 @@ signed main() {
     }
     
     if (name != "") {
-        rank_list->add(name, score_total);
+        rank_list->add(name, board->now_score());
         rank_list->save();
     }
 
@@ -103,7 +138,8 @@ signed main() {
     getch();
     endwin();
 
-    printf("Your score is: %d\n", score_total);
+    printf("Your score is: %d\n", board->now_score());
+    end_game();
 
     return 0;
 }
