@@ -31,7 +31,7 @@ signed main() {
     rank_list = new sl::rank_list(rank_name);
     pause = new vi::pause_interface();
     game = new vi::game_interface();
-    game->set_round(1);
+    game->set_round(round);
     load = new vi::load_interface();
     cur_map = new sl::current_map(board, round);
 
@@ -76,8 +76,9 @@ signed main() {
                         delete board;
                         board = new mp::map();
                         delete cur_map;
-                        cur_map = new sl::current_map(board, 1);
-                        game->set_round(1);
+                        round = 1;
+                        cur_map = new sl::current_map(board, round);
+                        game->set_round(round);
 
                         game->refresh();
                         flag_pause = 0;
@@ -90,7 +91,7 @@ signed main() {
                     if (s.find("Save") != std::string::npos)
                         cur_map->save(s.substr(5));
 
-                    if (s.find("Load") != std::string::npos)
+                    if (s.find("Load") != std::string::npos) 
                         cur_map->load(s.substr(5));
                 }
                 continue;
@@ -112,8 +113,9 @@ signed main() {
         delete board;
         board = new mp::map();
         delete cur_map;
-        cur_map = new sl::current_map(board, now_round + 1);
-        game->set_round(now_round + 1);
+        round = now_round + 1;
+        cur_map = new sl::current_map(board, round);
+        game->set_round(round);
         board->score_set(now_score);
 
         game->refresh();

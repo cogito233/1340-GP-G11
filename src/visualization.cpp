@@ -186,8 +186,8 @@ namespace vi{
 
         // this->rank->round_set(round);
     }
-    void game_interface::set_round(int round) {
-        this->round = round;
+    void game_interface::set_round(int &round) {
+        this->round = &round;
     }
     void game_interface::print_map() {
         move(0, 0);
@@ -209,9 +209,9 @@ namespace vi{
 
     void game_interface::print_interface() {
         move(30,0);
-        printw("Your score: %d\n",this->board->now_score());
-        printw("Now is Round %d\n",this->round);
-        printw("target score is %d\n",this->round * 24000 + 2000 * this->round * (this->round - 1) / 2);
+        printw("Your score: %d\n", this->board->now_score());
+        printw("Now is Round %d\n", *this->round);
+        printw("target score is %d\n", *this->round * 24000 + 2000 * *this->round * (*this->round - 1) / 2);
 
     }
 

@@ -31,7 +31,7 @@ namespace vi{
     };
     class game_interface{
     private:
-        int round = 0;
+        int *round;
         mp::map *board;
         sl::rank_list *rank;
         void print_map();
@@ -39,7 +39,7 @@ namespace vi{
     public:
         game_interface();
         void link_map(mp::map *mp);
-        void set_round(int round);
+        void set_round(int &round);
         void link_rank(sl::rank_list *rank);
         std::string mouse_operation(int &y, int &x);
         std::string keyboard_operation(int &y, int &x);

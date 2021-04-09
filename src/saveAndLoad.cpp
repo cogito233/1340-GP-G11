@@ -74,9 +74,9 @@ namespace sl {
         }
     }
 
-    current_map::current_map(mp::map *board, int round) {
+    current_map::current_map(mp::map *board, int &round) {
         this->board = board;
-        this->round = round;
+        this->round = &round;
     }
 
     int current_map::save(std::string name) {
@@ -110,7 +110,7 @@ namespace sl {
         }
 
         fout << this->board->now_score() << std::endl;
-        fout << this->round << std::endl;
+        fout << *this->round << std::endl;
 
         fout.close();
 
@@ -142,7 +142,7 @@ namespace sl {
             }
         fin >> val;
         this->board->score_set(val);
-        fin >> this->round;
+        fin >> *this->round;
         
         fin.close();
 
@@ -153,6 +153,6 @@ namespace sl {
         return 0;       
     }
     int current_map::get_round() {
-        return this->round;
+        return *this->round;
     }
 }

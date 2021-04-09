@@ -29,9 +29,9 @@ namespace sl{
     class current_map {
         private:
             mp::map *board;
-            int round;
+            int *round;
         public:
-            current_map(mp::map *board, int round);
+            current_map(mp::map *board, int &round);
             //void link_map(mp::map *board);
             //void set_round(int round);
             int get_round();
