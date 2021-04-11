@@ -18,7 +18,7 @@ obj/visualization.o: src/visualization.cpp src/visualization.h obj/map.o
 obj/saveAndLoad.o: src/saveAndLoad.cpp src/saveAndLoad.h obj/map.o obj/visualization.o
 	@g++ $(FLAGS) -lncurses $< -g -c -o $@
 
-bin/game: src/main_vis.cpp obj/map.o obj/visualization.o obj/saveAndLoad.o
+bin/game: src/main.cpp obj/map.o obj/visualization.o obj/saveAndLoad.o
 	@mkdir bin
 	@echo "Compiling sources..."
 	@g++ $(FLAGS) $^ -lncurses -g -o $@
