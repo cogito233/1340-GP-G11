@@ -53,3 +53,9 @@ Xijia TAO (3035767762)
 ### External libraries that might be used
 
 - `ncurses`
+
+### More informations
+
+[get_started](./doc/get_started.md)
+
+[Game operation guide](./doc/Instructions.md)
