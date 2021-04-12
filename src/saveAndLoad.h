@@ -15,7 +15,7 @@ struct ranklist {
 
 class rank_list {
 private:
-  ranklist rk[10];
+  ranklist rk[11];
   int ranker_num;
   std::string filename;
 

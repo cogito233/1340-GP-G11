@@ -2,20 +2,27 @@
 
 namespace sl {
 rank_list::rank_list(std::string filename) {
+  if (filename == "") {
+    move(1, 0);
+    printw("Filename cannot be empty.\n");
+    printw("Press any key to exit.");
+    getch();
+    return;
+  }
+
   this->filename = "log/" + filename;
   std::ifstream fin(this->filename.c_str());
 
-  std::string name;
-  int score;
-  this->ranker_num = 0;
-
   if (fin.fail()) {
-    move(25, 0);
     printw("Cannot load log/%s\n", filename.c_str());
     printw("Press any key to exit.");
     getch();
     return;
   }
+
+  std::string name;
+  int score;
+  this->ranker_num = 0;
 
   while (fin >> name) {
     fin >> score;
@@ -40,7 +47,8 @@ void rank_list::add(std::string name, int score) {
   this->rk[ranker_num].name = name;
   this->rk[ranker_num].score = score;
   this->sort();
-  this->ranker_num++;
+  if (ranker_num < 10) 
+    this->ranker_num++;
 }
 
 int rank_list::save() {
@@ -48,7 +56,7 @@ int rank_list::save() {
   fout.open(this->filename);
 
   if (fout.fail()) {
-    move(25, 0);
+    move(0, 0);
     printw("Store operation failed:\ncannot open file %s\n", filename.c_str());
     printw("Press any key to exit.");
     getch();
@@ -79,6 +87,14 @@ current_map::current_map(mp::map *board, int &round) {
 }
 
 int current_map::save(std::string name) {
+  if (name == "") {
+    move(1, 0);
+    printw("Filename cannot be empty.\n");
+    printw("Press any key to exit.");
+    getch();
+    return 1;
+  }
+
   // Find current time and store it in buffer
   time_t rawtime;
   struct tm *timeinfo;
@@ -95,7 +111,7 @@ int current_map::save(std::string name) {
   fout.open(filename);
 
   if (fout.fail()) {
-    move(0, 1);
+    move(1, 0);
     printw("Store operation failed: cannot open file %s\n", filename.c_str());
     printw("Press any key to exit.");
     getch();
@@ -121,6 +137,14 @@ int current_map::save(std::string name) {
 }
 
 int current_map::load(std::string name) {
+  if (name == "") {
+    move(1, 0);
+    printw("Filename cannot be empty.\n");
+    printw("Press any key to exit.");
+    getch();
+    return 1;
+  }
+
   int val;
   std::ifstream fin;
   std::string filename = "log/" + name;

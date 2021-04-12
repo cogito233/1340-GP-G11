@@ -23,6 +23,7 @@ void end_game() {
 signed main() {
   initscr();
   cbreak();
+  noecho();
 
   int round = 1;
   std::string rank_name = "__rank__.txt";
@@ -109,7 +110,7 @@ signed main() {
         now_round * 24000 + 2000 * now_round * (now_round - 1) / 2;
     int now_score = board->now_score();
     if (now_score < target_score) {
-      move(10, 0);
+      move(21, 0);
       printw("Sadly, the target score was %d and you got %d", target_score,
              now_score);
       break;
@@ -125,10 +126,11 @@ signed main() {
     game->refresh();
     // flag_pause = 0;
   }
-  move(21, 0);
+  move(22, 0);
   printw("Game over\nTo display your score on the leaderboard, \nInput your "
          "preferred name here: ");
-
+  
+  echo();
   char c = getch();
   std::string name = "";
   while (c != '\n') {

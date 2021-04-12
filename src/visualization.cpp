@@ -38,6 +38,7 @@ std::string load_interface::save_or_load(std::string s) {
   clear();
   keypad(stdscr, true);
   start_color();
+  echo();
 
   move(0, 0);
   printw("%s", s.c_str());
@@ -47,6 +48,7 @@ std::string load_interface::save_or_load(std::string s) {
     str += c;
     c = getch();
   }
+  noecho();
   return str;
 }
 
@@ -128,7 +130,7 @@ std::string load_interface::get_order() {
       this->load[highlight].text = " Key Mode ";
   }
   if (highlight == 2)
-    return "Load " + this->save_or_load("Load from (input filename): ");
+    return "Load " + this->save_or_load("Load from: ");
   if (highlight == 3)
     this->Help();
   if (highlight == 4)
