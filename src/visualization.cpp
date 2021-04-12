@@ -229,7 +229,7 @@ void game_interface::print_map() {
   for (int i = 1; i <= 20; i++) {
     for (int j = 1; j <= 20; j++) {
       attron(COLOR_PAIR(this->board->map_query(i, j)));
-      printw(" ");
+      printw("  ");
       attroff(COLOR_PAIR(this->board->map_query(i, j)));
     }
     printw("\n");
@@ -237,7 +237,7 @@ void game_interface::print_map() {
 }
 
 void game_interface::print_interface() {
-  move(30, 0);
+  move(22, 0);
   printw("Your score: %d\n", this->board->now_score());
   printw("Now is Round %d\n", *this->round);
   printw("target score is %d\n",
@@ -269,7 +269,7 @@ std::string game_interface::mouse_operation(int &y, int &x) {
     ch = getch();
     if (ch == KEY_MOUSE && getmouse(&event) == OK) {
       y = event.y;
-      x = event.x;
+      x = event.x / 2;
       return "Chosen";
     } else if (ch == 'p')
       return "Pause";
@@ -277,11 +277,10 @@ std::string game_interface::mouse_operation(int &y, int &x) {
 }
 
 std::string game_interface::keyboard_operation(int &y, int &x) {
-  move(y, x);
+  move(y, 2*x);
   keypad(stdscr, true);
   int ch;
 
-  move(y, x);
   while (true) {
     ch = getch();
     switch (ch) {
@@ -306,7 +305,7 @@ std::string game_interface::keyboard_operation(int &y, int &x) {
     case 'p':
       return "Pause";
     }
-    move(y, x);
+    move(y, 2*x);
   }
 }
 } // namespace vi
