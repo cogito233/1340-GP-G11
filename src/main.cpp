@@ -26,7 +26,7 @@ signed main() {
   noecho();
 
   int round = 1;
-  std::string rank_name = "__rank__.txt";
+  std::string rank_name = "rank.txt";
 
   board = new mp::map();
   rank_list = new sl::rank_list(rank_name);
@@ -111,7 +111,7 @@ signed main() {
     int now_score = board->now_score();
     if (now_score < target_score) {
       move(21, 0);
-      printw("Sadly, the target score was %d and you got %d", target_score,
+      printw("Sadly, the target score was %d and you got %d\n", target_score,
              now_score);
       break;
     }

@@ -1,0 +1,10 @@
+Alpha 1000000
+Beta 500000
+Gamma 100000
+Delta 90000
+Epsilon 80000
+Zeta 70000
+Eta 50000
+Ciel 49025
+Theta 30000
+Iota 20000

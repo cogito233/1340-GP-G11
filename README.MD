@@ -1,61 +1,63 @@
 # SameGame in C++
 
-### Team member
+### Team Members
 
 Zhiheng LYU (3035772432)
 
 Xijia TAO (3035767762)
 
-### Game description
+### Game Description
 
-- The basic interface is shown below (just a bit similar to it in a way):
-
-![samegame](samegame.png)
+![demo_1](doc/demo_1.png)
 
 - Initially, the field is filled with blocks of different colors.
-- As the game we familiar with, we can eliminate two or more adjacent blocks of the same color. The more blocks you eliminate at one time, the higher your score will be. 
-- After every removal, blocks that are not supported will fall down. If a column has no blocks, other columns on its right will slide towards it (i.e., to the left).
-- There is a bonus point for leaving as few blocks as possible that can not be eliminated.
-- If your score exceeds the requirements for the current round, you can continue the game and proceed to the next round.
+- One can eliminate two or more adjacent blocks of the same color. The more blocks one eliminate at a time, the higher the score s/he will get for that operation. 
+- After every operation, blocks that are no longer supported will fall down. If a column has no blocks, other columns on its right will slide towards it (i.e., to the left).
+- If one's score exceeds the requirements for the current round, s/he can continue the game and proceed to the next round.
 
-### Game features
+### Game Features
 
 1. Generation of random game sets or events
    
-   - We use seed to generate a random game graph based on a difficulty factor that increases with the number of rounds of the game. The difficulty factor is primarily determined by the expected score when interacting with the game randomly, i.e., by applying Monte Carlo method.
+   - We've used seed to randomly generate a game board and a leaderboard (*TODO*).
    
 2. Data structures for storing game status
    
-   - We generate a random game *graph* based on a difficulty factor that increases with the number of rounds of the game.
+   - We've created a class `map` for keeping track of the game board as well as conducting operations upon it. Note that the board is stored simply as a 2D array due to its fixed size.
+   - For storing and loading game status, we chose to create a separate class named `current_map`, which contains information on the board and number of rounds and helper functions to store/load them accordingly. 
+   - We've also designed a structure and a class to implement a rank list for our game's leaderboard.
    
-3. Dynamic memory management
+3. Dynamic memory management (**TBC**)
 
    - We use linked lists to store map information, and we delete parts of the map that have been eliminated in time. Linked lists, in comparison to arrays, can have dynamic sizes and cost less time of deletion.
 
-   - After finishing a round of the game, we delete and recreate a `Map` object to prevent memory leaks.
+   - After finishing a round of the game, we delete and recreate a `map` object to prevent memory leaks.
 
 4. File input/output (e.g., for loading/saving game status)
-   - We generate a `name.json` (The `name` is from input) to store, including the current map information, the score information, and the number of rounds played.
-   - The information about the leaderboards is stored in the `rank.json` file
+
+   - Before/during the game, one has the option to load a stored game board and continue to play.
+
+   - During the game, one has the option to save the current map information, the score information, and the number of rounds played to `log/[filename].txt`, with the filename determined by his/her input.
+   - When the game is over, one has the option to save his/her score to the leaderboard in `log/rank.txt`, with the displayed name given from input. The updated leaderboard will be displayed next time s/he play the game.
 
 5. Program codes in multiple files
-   - `./lib` includes the library files required by the code
+   - `./lib` includes the non-standard library files required by the code
    - `./bin` includes the binary executables
    - `./src` includes the source files:
      - `main.cpp`
-       - `save_and_load.cpp`
-         - `save_and_load.h`
        - `map.cpp`
          - `map.h`
        - `visualization.cpp`
          - `visualization.h`
+       - `saveAndLoad.cpp`
+         - `saveAndLoad.h`
 
-### External libraries that might be used
+### External Libraries 
 
-- `ncurses`
+- `ncurses`: we used it to visualize our text-based game as well as processing inputs from both keyboard and mouse.
 
-### More informations
+### Further Info
 
-[get_started](./doc/get_started.md)
+[**Compilation & Execution Instructions**](doc/get_started.md)
 
-[Game operation guide](./doc/Instructions.md)
+[**Operation Guide**](doc/Instructions.md)
