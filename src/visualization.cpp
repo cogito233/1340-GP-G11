@@ -70,9 +70,12 @@ void load_interface::refresh(text_anchor a[], int n, int highlight) {
 
   init_pair(0, COLOR_BLACK, COLOR_BLACK);
   init_pair(1, COLOR_BLACK, COLOR_RED);
-
-  move(0,0);
-  for (int i = 0; i < 22; i++)printw("%s\n",this->pic[i].c_str());
+  if (a==this->load) {
+    move(0,0);
+    for (int i = 0; i < 22; i++){
+      printw("%s\n",this->pic[i].c_str());
+    }
+  }
   for (int i = 0; i < n; i++) {
     int l = a[i].text.length();
 
