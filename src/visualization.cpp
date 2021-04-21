@@ -15,15 +15,15 @@ load_interface::load_interface() {
   this->load[4].text = " End_Game ";
 
   this->load[0].x = 4;
-  this->load[0].y = 50;
+  this->load[0].y = 60;
   this->load[1].x = 8;
-  this->load[1].y = 50;
+  this->load[1].y = 60;
   this->load[2].x = 12;
-  this->load[2].y = 50;
+  this->load[2].y = 60;
   this->load[3].x = 16;
-  this->load[3].y = 50;
+  this->load[3].y = 60;
   this->load[4].x = 20;
-  this->load[4].y = 50;
+  this->load[4].y = 60;
 
   int a[5][4] = {
       {0, 1, 0, 0}, {0, 2, 1, 1}, {1, 3, 2, 2}, {2, 4, 3, 3}, {3, 4, 4, 4}};
@@ -70,6 +70,9 @@ void load_interface::refresh(text_anchor a[], int n, int highlight) {
 
   init_pair(0, COLOR_BLACK, COLOR_BLACK);
   init_pair(1, COLOR_BLACK, COLOR_RED);
+
+  move(0,0);
+  for (int i = 0; i < 22; i++)printw("%s\n",this->pic[i].c_str());
   for (int i = 0; i < n; i++) {
     int l = a[i].text.length();
 
@@ -93,7 +96,7 @@ void load_interface::refresh(text_anchor a[], int n, int highlight) {
     printw(" ");
   }
 
-  move(30, 0);
+  move(40, 0);
 }
 
 std::string load_interface::get_order() {
