@@ -41,9 +41,9 @@ signed main() {
 
   while (flag_load) {
     s = load->get_order();
-    if (s == "New_Game_Cli" || s == "New_Game_Key")
+    if (s == "New Game Cli" || s == "New Game Key")
       flag_load = 0;
-    if (s == "End_Game") {
+    if (s == "End Game") {
       end_game();
       endwin();
       return 0;
@@ -54,7 +54,7 @@ signed main() {
   int x = 0, y = 0, score;
   int score_total = 0;
   string str;
-  bool isCli = (s == "New_Game_Cli");
+  bool isCli = (s == "New Game Cli");
 
   game->link_map(board);
   game->link_rank(rank_list);
@@ -75,7 +75,7 @@ signed main() {
             flag_pause = 0;
             game->refresh();
           }
-          if (s == "New_Game") {
+          if (s == "New Game") {
             delete board;
             board = new mp::map();
             delete cur_map;
@@ -86,7 +86,7 @@ signed main() {
             game->refresh();
             flag_pause = 0;
           }
-          if (s == "End_Game") {
+          if (s == "End Game") {
             endwin();
             end_game();
             return 0;
@@ -126,7 +126,7 @@ signed main() {
     game->refresh();
     // flag_pause = 0;
   }
-  move(22, 0);
+  move(21, 0);
   printw("Game over\nTo display your score on the leaderboard, \nInput your "
          "preferred name here: ");
   
