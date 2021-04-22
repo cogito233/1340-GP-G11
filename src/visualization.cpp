@@ -8,11 +8,11 @@ load_interface::load_interface() {
   keypad(stdscr, true);
   start_color();
 
-  this->load[0].text = " New Game ";
+  this->load[0].text = " New_Game ";
   this->load[1].text = "Click Mode";
   this->load[2].text = "   Load   ";
   this->load[3].text = "   Help   ";
-  this->load[4].text = " End Game ";
+  this->load[4].text = " End_Game ";
 
   this->load[0].x = 4;
   this->load[0].y = 60;
@@ -58,8 +58,8 @@ void load_interface::Help() {
   start_color();
 
   move(0, 0);
-  for (int i = 0; i < 20; i++) 
-    printw("%s\n",this->help[i].c_str());
+  printw("This is a Help.\n");
+  printw("Press any key to exit.\n");
   getch();
 }
 
@@ -125,9 +125,9 @@ std::string load_interface::get_order() {
   }
   if (highlight == 0) {
     if (this->load[1].text == " Key Mode ")
-      return "New Game Key";
+      return "New_Game_Key";
     else
-      return "New Game Cli";
+      return "New_Game_Cli";
   }
   if (highlight == 1) {
     if (this->load[highlight].text == " Key Mode ")
@@ -140,7 +140,7 @@ std::string load_interface::get_order() {
   if (highlight == 3)
     this->Help();
   if (highlight == 4)
-    return "End Game";
+    return "End_Game";
 
   return "Error";
 }
@@ -152,10 +152,10 @@ pause_interface::pause_interface() {
   keypad(stdscr, true);
   start_color();
 
-  this->pause[0].text = "  New Game  ";
+  this->pause[0].text = "  New_Game  ";
   this->pause[1].text = "Load";
   this->pause[2].text = "    Help    ";
-  this->pause[3].text = "  End Game  ";
+  this->pause[3].text = "  End_Game  ";
   this->pause[4].text = "  Continue  ";
   this->pause[5].text = "Save";
 
@@ -202,9 +202,9 @@ std::string pause_interface::get_order() {
     c = getch();
   }
   if (highlight == 0)
-    return "New Game";
+    return "New_Game";
   if (highlight == 3)
-    return "End Game";
+    return "End_Game";
   if (highlight == 2)
     this->Help();
   if (highlight == 4)

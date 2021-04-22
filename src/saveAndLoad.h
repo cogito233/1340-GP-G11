@@ -37,7 +37,7 @@ public:
   // void link_map(mp::map *board);
   // void set_round(int round);
   int get_round();
-  int save(std::string filename);
+  int save(std::string name);
   int load(std::string filename);
 };
 } // namespace sl

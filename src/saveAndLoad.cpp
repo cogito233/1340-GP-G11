@@ -86,8 +86,8 @@ current_map::current_map(mp::map *board, int &round) {
   this->round = &round;
 }
 
-int current_map::save(std::string filename) {
-  if (filename == "") {
+int current_map::save(std::string name) {
+  if (name == "") {
     move(1, 0);
     printw("Filename cannot be empty.\n");
     printw("Press any key to exit.");
@@ -95,7 +95,18 @@ int current_map::save(std::string filename) {
     return 1;
   }
 
-  filename = "log/" + filename + ".txt";
+  // Find current time and store it in buffer
+  time_t rawtime;
+  struct tm *timeinfo;
+  char buffer[80];
+
+  time(&rawtime);
+  timeinfo = localtime(&rawtime);
+
+  strftime(buffer, 80, "%F-%H-%M-%S", timeinfo);
+
+  // Write to file
+  std::string filename = "log/" + name + '-' + buffer + ".txt";
   std::ofstream fout;
   fout.open(filename);
 
@@ -125,8 +136,8 @@ int current_map::save(std::string filename) {
   return 0;
 }
 
-int current_map::load(std::string filename) {
-  if (filename == "") {
+int current_map::load(std::string name) {
+  if (name == "") {
     move(1, 0);
     printw("Filename cannot be empty.\n");
     printw("Press any key to exit.");
@@ -136,7 +147,7 @@ int current_map::load(std::string filename) {
 
   int val;
   std::ifstream fin;
-  filename = "log/" + filename + ".txt";
+  std::string filename = "log/" + name;
   fin.open(filename.c_str());
 
   if (fin.fail()) {
@@ -164,6 +175,5 @@ int current_map::load(std::string filename) {
 
   return 0;
 }
-
 int current_map::get_round() { return *this->round; }
 } // namespace sl

@@ -15,52 +15,30 @@ struct text_anchor {
 class load_interface { // Load, Game Mode, New_Game, End_Game, Help
 private:
   text_anchor load[5];
-  std::string pic[22] = {
-  "                                                  ",
-  "                                                  ",
-  "                                                  ",
-  "       _/_/_/                                     ",
-  "    _/          _/_/_/  _/_/_/  _/_/      _/_/    ",
-  "     _/_/    _/    _/  _/    _/    _/  _/_/_/_/   ",
-  "        _/  _/    _/  _/    _/    _/  _/          ",
-  " _/_/_/      _/_/_/  _/    _/    _/    _/_/_/     ",
-  "                                                  ",
-  "                                                         ",
-  "                                                         ",
-  "            _/_/_/                                       ",
-  "           _/          _/_/_/  _/_/_/  _/_/      _/_/    ",
-  "          _/  _/_/  _/    _/  _/    _/    _/  _/_/_/_/   ",
-  "         _/    _/  _/    _/  _/    _/    _/  _/          ",
-  "          _/_/_/    _/_/_/  _/    _/    _/    _/_/_/     ",
-  "                                                         ",
-  "                                                         ",
-  "                                                         ",
-  " Author: Xijia Tao, Zhiheng Lyu                          ",
-  "                                                         ",
-  " Use [Up/Down] to move the cursor, [Space] to confirm    "
-  };
-  std::string help[20] = {
-  "  ---------------------------------------------------------------- ",
-  " | New Game   | Start a new game                                  |",
-  "  ---------------------------------------------------------------- ",
-  " | End Game   | End the current game                              |",
-  "  ---------------------------------------------------------------- ",
-  " | Click Mode | Play the game by mouse                            |",
-  " |            | Click to eliminate blocks                         |",
-  "  ---------------------------------------------------------------- ",
-  " | Key Mode   | Play the game by keyboard                         |",
-  " |            | Use [Up/Down/Left/Right] to navigate in the board |",
-  " |            | Press [Space] to eliminate blocks                 |",
-  "  ---------------------------------------------------------------- ",
-  " | Save       | Save the game status with inputted filename       |",
-  " |            | (without extension)                               |",
-  "  ---------------------------------------------------------------- ",
-  " | Load       | Load stored game status with inputted filename    |",
-  " |            | (without extension)                               |",
-  "  ---------------------------------------------------------------- ",
-  "                                                                   ",  
-  "   Press any key to exit.                                           "
-  };
+  std::string pic[22]={
+"                                                  ",
+"                                                  ",
+"                                                  ",
+"       _/_/_/                                     ",
+"    _/          _/_/_/  _/_/_/  _/_/      _/_/    ",
+"     _/_/    _/    _/  _/    _/    _/  _/_/_/_/   ",
+"        _/  _/    _/  _/    _/    _/  _/          ",
+" _/_/_/      _/_/_/  _/    _/    _/    _/_/_/     ",
+"                                                  ",
+"                                                         ",
+"                                                         ",
+"            _/_/_/                                       ",
+"           _/          _/_/_/  _/_/_/  _/_/      _/_/    ",
+"          _/  _/_/  _/    _/  _/    _/    _/  _/_/_/_/   ",
+"         _/    _/  _/    _/  _/    _/    _/  _/          ",
+"          _/_/_/    _/_/_/  _/    _/    _/    _/_/_/     ",
+"                                                         ",
+"                                                         ",
+"                                                         ",
+" Author: Xijia Tao, Zhiheng Lyu                          ",
+"                                                         ",
+" Use [Up/Down] to move the cursor, [Space] to confirm    "
+};
 public:
   std::string save_or_load(std::string s);
   void Help();
