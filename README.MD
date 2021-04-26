@@ -50,6 +50,7 @@ Xijia TAO (3035767762)
 - `ncurses` is used to visualize the text-based game as well as processing inputs from both keyboard and mouse.
 
 ### Further Info
+**Note** The `Click Mode` has been tested to be working properly under X2Go and Windows Terminal, but may NOT work under cmd/PowerShell with connection via ssh. In which case one may opt for the `Key Mode` instead.
 
 [**Compilation & Execution Instructions**](doc/get_started.md)
 
