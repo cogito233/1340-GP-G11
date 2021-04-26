@@ -2,8 +2,7 @@
 FLAGS = -pedantic-errors -std=c++11 -I ~/local/include -I ~/local/include/ncurses -L ~/local/lib
 
 # Build the game directly
-all:
-	@make clean
+all: ncurses clean
 	@make bin/game
 	@echo "Run the game with \`bin/game\`"
 
@@ -44,4 +43,4 @@ ncurses:
 	@./get.sh
 	@echo "Installed Successfully"
 
-.PHONY: clean clean-log ncurses
+.PHONY: clean clean-log
