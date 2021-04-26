@@ -34,8 +34,6 @@ private:
 
 public:
   current_map(mp::map *board, int &round);
-  // void link_map(mp::map *board);
-  // void set_round(int round);
   int get_round();
   int save(std::string filename);
   int load(std::string filename);

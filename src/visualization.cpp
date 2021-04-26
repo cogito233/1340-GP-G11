@@ -1,3 +1,10 @@
+/*
+  This program is responsible for creating interface for
+    1. loading
+    2. pausing
+    3. gaming
+*/
+
 #include "visualization.h"
 
 namespace vi {

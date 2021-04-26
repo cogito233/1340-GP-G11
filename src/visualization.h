@@ -12,7 +12,7 @@ struct text_anchor {
   int direct[4];
   std::string text;
 };
-class load_interface { // Load, Game Mode, New_Game, End_Game, Help
+class load_interface { // Load, Game Mode, New Game, End Game, Help
 private:
   text_anchor load[5];
   std::string pic[22] = {
@@ -69,7 +69,7 @@ public:
   std::string get_order();
 };
 class pause_interface
-    : public load_interface { // Save,Load,Continue,New_Game,End_Game,Help
+    : public load_interface { // Save, Load, Continue, New Game, End Game,Help
 private:
   text_anchor pause[6];
 

@@ -1,3 +1,10 @@
+/*
+  This program is responsible for 
+    1. defining operations on map
+    2. displaying the map
+    3. supporting setting map attributes outside the program
+*/
+
 #include "map.h"
 #include <bits/stdc++.h>
 #include <ncurses.h>

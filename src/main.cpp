@@ -1,3 +1,9 @@
+/*
+  This program is responsible for 
+    1. controlling the flow of the entire game
+    2. processing player's inputs
+*/
+
 #include "map.h"
 #include "saveAndLoad.h"
 #include "visualization.h"
@@ -11,6 +17,7 @@ vi::load_interface *load;
 vi::pause_interface *pause;
 sl::current_map *cur_map;
 sl::rank_list *rank_list;
+
 void end_game() {
   delete board;
   delete game;

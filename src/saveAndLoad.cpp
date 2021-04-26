@@ -1,3 +1,9 @@
+/*
+  This program is responsible for saving & loading
+    1. rank list (aka leaderboard)
+    2. current game status
+*/
+
 #include "saveAndLoad.h"
 
 namespace sl {
